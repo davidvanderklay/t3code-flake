@@ -16,11 +16,11 @@
   };
 
   orchestrator = {
-    version = "0.0.45-preview.20261001.2556";
-    rev = "a2ca40a56d82ffb87c9f60b0471e0aea052487bf";
+    version = "0.0.43-preview.20260928.2409";
+    rev = "30f21318562e674e87aa7a588886e7c82c6d6b80";
     sources = {
-      x86_64-linux.hash = "sha256-teDaoxaKipWALu52CEro6orYKRcupC2BhrkilvUzBsw=";
-      aarch64-darwin.hash = "sha256-CZR71hYsqAy79ZHfADNi1fVEJSWERcEd9QM3XGBMubA=";
+      x86_64-linux.hash = "sha256-doNuMQ9lCEPGOtmt44IesJRz7UkmQvKFPGDoq0GmzEo=";
+      aarch64-darwin.hash = "sha256-pMA0+5XZIVb0mVREbCsw9tNFPpRjt5smQh6++lwvTOc=";
     };
   };
 }
