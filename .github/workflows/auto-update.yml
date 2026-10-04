@@ -23,10 +23,8 @@ jobs:
       changed: ${{ steps.latest.outputs.changed }}
       stable_changed: ${{ steps.latest.outputs.stable_changed }}
       nightly_changed: ${{ steps.latest.outputs.nightly_changed }}
-      orchestrator_changed: ${{ steps.latest.outputs.orchestrator_changed }}
       stable_version: ${{ steps.latest.outputs.stable_version }}
       nightly_version: ${{ steps.latest.outputs.nightly_version }}
-      orchestrator_version: ${{ steps.latest.outputs.orchestrator_version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -46,7 +44,7 @@ jobs:
           RELEASE_NOTES_DIR=release-notes ./update.sh > releases.nix.new
 
           changed=false
-          for channel in stable nightly orchestrator; do
+          for channel in stable nightly; do
             version="$(sed -n "/^  ${channel} = {/,/^  };/s/^[[:space:]]*version = \"\(.*\)\";$/\1/p" releases.nix.new | head -n1)"
             if [[ -z "${version}" ]]; then
               echo "Failed to parse ${channel} version from generated releases.nix."
@@ -113,10 +111,6 @@ jobs:
         if: needs.check-update.outputs.nightly_changed == 'true'
         run: nix build .#t3-code-nightly -L
 
-      - name: Build orchestrator package
-        if: needs.check-update.outputs.orchestrator_changed == 'true'
-        run: nix build .#orchestrator -L
-
   push:
     needs:
       - check-update
@@ -148,10 +142,8 @@ jobs:
 
           stable_changed='${{ needs.check-update.outputs.stable_changed }}'
           nightly_changed='${{ needs.check-update.outputs.nightly_changed }}'
-          orchestrator_changed='${{ needs.check-update.outputs.orchestrator_changed }}'
           stable_version='${{ needs.check-update.outputs.stable_version }}'
           nightly_version='${{ needs.check-update.outputs.nightly_version }}'
-          orchestrator_version='${{ needs.check-update.outputs.orchestrator_version }}'
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -191,10 +183,6 @@ jobs:
 
           if [[ "${nightly_changed}" == "true" ]]; then
             commit_channel nightly "${nightly_version}"
-          fi
-
-          if [[ "${orchestrator_changed}" == "true" ]]; then
-            commit_channel orchestrator "${orchestrator_version}"
           fi
 
           git push
