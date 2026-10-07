@@ -171,8 +171,9 @@
             mkdir -p $out/share/icons
             cp -R usr/share/icons/hicolor $out/share/icons/hicolor
 
-            substituteInPlace ${desktopPath} \
-              --replace-fail 'Exec=AppRun --no-sandbox %U' 'Exec=t3code %U'
+            # Upstream AppImage toolsets change the launcher arguments.
+            grep -q '^Exec=' ${desktopPath}
+            sed -i 's/^Exec=.*/Exec=t3code %U/' ${desktopPath}
 
             ${lib.optionalString (channel.desktopName != null) ''
               if grep -q '^Name=' ${desktopPath}; then
