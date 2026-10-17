@@ -49,7 +49,7 @@
           desktopFileName = "t3-code";
           desktopName = null;
           iconName = null;
-          darwinBundleName = "T3 Code (Alpha)";
+          darwinBundleName = "T3 Code (Beta)";
           autoPatchelfIgnoreMissingDeps = [ "libc.musl-x86_64.so.1" ];
         };
 
