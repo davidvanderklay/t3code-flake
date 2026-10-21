@@ -1,5 +1,9 @@
 # t3code-flake
 
+## Archived
+
+This fork is archived and no longer maintained. I moved my config off this flake so I can receive T3 Code updates more frequently. I won't be making further changes here.
+
 [![Nix Flake](https://img.shields.io/badge/Nix-flake-5277C3?logo=nixos&logoColor=white)](https://nixos.org/)
 [![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macOS-6b7280)](https://github.com/omarcresp/t3code-flake)
 
